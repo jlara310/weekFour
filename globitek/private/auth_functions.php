@@ -4,6 +4,8 @@
   // Also protects user from session fixation.
   function log_in_user($user) {
     // TODO Store user's ID in session
+    $_SESSION["user_id"] = $user["id"] ;
+    $_SESSION['last_login'] = time();
     // TODO Store last login time in session
     return true;
   }
@@ -24,7 +26,9 @@
   // request by comparing it to the user's last login time.
   function last_login_is_recent() {
     // TODO add code to determine if last login is recent
-    return true;
+    $recent_limit = 60 * 60 * 24 * 1; // 1 day
+    if(!isset($_SESSION['last_login'])) { return false; }
+    return (($_SESSION['last_login'] + $recent_limit) >= time());
   }
 
   // Checks to see if the user-agent string of the current request
