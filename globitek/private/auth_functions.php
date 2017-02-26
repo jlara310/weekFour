@@ -3,10 +3,12 @@
   // Will perform all actions necessary to log in the user
   // Also protects user from session fixation.
   function log_in_user($user) {
+    session_regenerate_id();
     // TODO Store user's ID in session
+    // TODO Store last login time in session
     $_SESSION["user_id"] = $user["id"] ;
     $_SESSION['last_login'] = time();
-    // TODO Store last login time in session
+    
     return true;
   }
 
