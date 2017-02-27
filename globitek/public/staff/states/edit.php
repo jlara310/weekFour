@@ -13,8 +13,10 @@ $state = db_fetch_assoc($states_result);
 $errors = array();
 
 if(is_post_request()) {
-
-  if(request_is_same_domain()){
+  
+  //Confirm POST request is from the same domain. If it's not, show error message
+  //Confirm valid csrf token. If not valid, show an error message.
+  if(request_is_same_domain() && csrf_token_is_valid()){
 
     // Confirm that values are present before accessing them.
     if(isset($_POST['name'])) { $state['name'] = $_POST['name']; }
@@ -51,6 +53,7 @@ if(is_post_request()) {
     Country ID:<br />
     <input type="text" name="country_id" value="<?php echo h($state['country_id']); ?>" /><br />
     <br />
+    <?php echo csrf_token_tag(); ?>
     <input type="submit" name="submit" value="Update"  />
   </form>
 
