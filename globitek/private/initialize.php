@@ -37,6 +37,9 @@ require_once('validation_functions.php');
 require_once('auth_functions.php');
 require_once('csrf_functions.php');
 
+//Add support for random_bytes
+require_once('random_lib/lib/random.php');
+
 $db = db_connect();
 
 ?>

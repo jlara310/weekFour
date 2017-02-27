@@ -10,7 +10,7 @@
   function create_csrf_token() {
     $token = csrf_token();
     $_SESSION['csrf_token'] = $token;
-    $_SESSION['csrf_token_time'] = $time();
+    $_SESSION['csrf_token_time'] = time();
     return $token;
   }
 
